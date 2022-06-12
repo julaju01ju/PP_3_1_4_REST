@@ -28,14 +28,14 @@ public class DataInit {
         roleService.saveRole(role1);
 
         User user0 = new User();
-        user0.setEmail("admin@gmail.com");
+        user0.setEmail("admin@mail.com");
         user0.setPassword("admin");
         user0.setName("Admin");
         user0.setAge((byte) 33);
         user0.addRole(role0);
 
         User user1 = new User();
-        user1.setEmail("user@gmail.com");
+        user1.setEmail("user@mail.com");
         user1.setPassword("user");
         user1.setName("User");
 
