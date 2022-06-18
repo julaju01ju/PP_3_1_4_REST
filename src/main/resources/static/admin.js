@@ -1,9 +1,9 @@
 $(async function () {
-    mainTableWithUsers()
-    mainTableWithUserId()
-    addNewUserForm()
-    addNewUser()
-    getDefaultModal()
+   await tableUsers();
+   await tableUserId();
+   await addNewUserForm();
+   await addNewUser();
+   await getDefaultModal();
 })
 
 const userFetchService = {
@@ -32,8 +32,8 @@ const userFetchService = {
     })
 }
 
-async function mainTableWithUserId() {
-    let table = $('#mainTableWithUserId');
+async function tableUserId() {
+    let table = $('#tableUserId');
     table.empty();
 
     await userFetchService.findUser()
@@ -52,8 +52,8 @@ async function mainTableWithUserId() {
         })
 }
 
-async function mainTableWithUsers() {
-    const usersList = document.querySelector('#mainTableWithUsers')
+async function tableUsers() {
+    const usersList = document.querySelector('#tableUsers')
     let result = ''
 
     await userFetchService.findAllUsers()
@@ -79,7 +79,7 @@ async function mainTableWithUsers() {
         }))
     usersList.innerHTML = result
 
-    $("#mainTableWithUsers").find('button').on('click', (event) => {
+    $("#tableUsers").find('button').on('click', (event) => {
         let defaultModal = $('#someDefaultModal');
         let targetButton = $(event.target);
         let buttonUserId = targetButton.attr('data-userid');
@@ -123,7 +123,7 @@ async function addNewUser() {
         }
         const response = await userFetchService.addNewUser(data);
         if (response.ok) {
-            mainTableWithUsers()
+           await tableUsers()
         }
     })
 }
@@ -218,7 +218,7 @@ async function deleteUser(modal, id) {
     $(`#deleteButton`).on('click', async () => {
         const response = await userFetchService.deleteUser(id);
         if (response.ok) {
-            mainTableWithUsers()
+           await tableUsers()
             modal.modal('hide');
         }
     })
@@ -303,7 +303,7 @@ async function editUser(modal, id) {
 
         const response = await userFetchService.updateUser(data)
         if (response.ok) {
-            mainTableWithUsers()
+           await tableUsers()
             modal.modal('hide')
         }
     })
